@@ -46,7 +46,9 @@ oApplicationTy oApplication = {false};
 
 void setup() {
 
-  ApplicationInit();
+  //ApplicationInit();
+  // For testing purpose, this line just crashes...
+  SystemTimeInit();
 
 }
 
@@ -65,17 +67,17 @@ bool ApplicationInit() {
     bRet = SystemTimeInit();
     if (!bRet) goto END;
 
-    // Once the system time is initialized, wait some time for electrical setup.
-    SystemTimeDelay(100);
+    // // Once the system time is initialized, wait some time for electrical setup.
+    // SystemTimeDelay(100);
 
-    // Initializing the moist sensor to D8
-    oApplication.poMoistSensorMgr = MoistSensorMgr(D8);
-    if (oApplication.poMoistSensorMgr == NULL) {
-      goto END;
-    }
+    // // Initializing the moist sensor to D8
+    // oApplication.poMoistSensorMgr = MoistSensorMgr(D8);
+    // if (oApplication.poMoistSensorMgr == NULL) {
+    //   goto END;
+    // }
 
-    bRet = MoistSensorMgrConfigure(oApplication.poMoistSensorMgr);
-    if (!bRet) goto END;
+    // bRet = MoistSensorMgrConfigure(oApplication.poMoistSensorMgr);
+    // if (!bRet) goto END;
 
   }
 

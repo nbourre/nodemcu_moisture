@@ -1,7 +1,7 @@
 ///
 /// \file 		SystemTime.c
 /// \brief 		SystemTime Utility Peripheral module
-/// \author 	NOVO - Dany Thiffeault, ing. (134853)
+/// \author 	
 ///
 
 ////////////////////////////////////////////////////////////////////////////////
