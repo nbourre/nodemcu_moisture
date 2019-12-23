@@ -9,31 +9,52 @@
 // Includes
 ////////////////////////////////////////////////////////////////////////////////
 #include "Arduino.h"
+#include "MoistSensorMgr.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Definitions
 ////////////////////////////////////////////////////////////////////////////////
+#define MOISTURE_PIN D8 // Arduino 8
+#define MOISTURE_DELAY 15000
+#define POLL_DELAY 100
+#define POLLING_TIME 10 * POLL_DELAY
+
+#define SERIAL_DELAY 1000
+
+#define MAP_MAX 1024
+#define MAP_MIN 350
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Data types
 ////////////////////////////////////////////////////////////////////////////////
+enum moisture_SM {BOOTING, WAITING, POLLING, REPORTING};
 
-typedef struct
-{
-	BOOL			bIsConfigured;					///< Flag indicating that the module is configured or not.
-	//TODO ADD PROPERTIES HERE!!
-} oMoistSensorMgrTy, *poMoistSensorMgrTy;
+
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
 // Private functions
 ////////////////////////////////////////////////////////////////////////////////
+void booting_state(int);
+void waiting_state(int);
+void polling_state(int);
+void reporting(int);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Local variables
 ////////////////////////////////////////////////////////////////////////////////
 oMoistSensorMgrTy oMoistSensorMgr			= {FALSE};
 
+enum moisture_SM current_state = BOOTING;
+
+unsigned long moisture_acc = MOISTURE_DELAY;
+int polling_time_acc = 0;
+int poll_acc = 0;
+int serial_acc = 0;
+
+int poll_count = 0;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief 		TODO DESCRIPTION HERE
@@ -42,9 +63,9 @@ oMoistSensorMgrTy oMoistSensorMgr			= {FALSE};
 /// \return		TRUE if success, FALSE otherwise.
 ////////////////////////////////////////////////////////////////////////////////
 
-BOOL MoistSensorMgr()
+bool MoistSensorMgr()
 {
-	BOOL bRet = FALSE;
+	bool bRet = FALSE;
 
 	// TODO YOUR CODE HERE!!
 
@@ -59,9 +80,9 @@ END:
 /// \return		TRUE if success, FALSE otherwise.
 ////////////////////////////////////////////////////////////////////////////////
 
-BOOL MoistSensorMgrTask()
+bool MoistSensorMgrTask()
 {
-	BOOL bRet = FALSE;
+	bool bRet = FALSE;
 
 	// TODO YOUR CODE HERE!!
 
@@ -76,9 +97,9 @@ END:
 /// \return		TRUE if success, FALSE otherwise.
 ////////////////////////////////////////////////////////////////////////////////
 
-BOOL MoistSensorMgrConfigure()
+bool MoistSensorMgrConfigure()
 {
-	BOOL bRet = FALSE;
+	bool bRet = FALSE;
 
 	// TODO YOUR CODE HERE!!
 

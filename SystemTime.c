@@ -32,7 +32,7 @@
 /// Object defining the SystemTime module.
 typedef struct
 {
-  BOOL		  bIsInitialized;				///< Flag indicating if this object is configured and ready to use.
+  bool		  bIsInitialized;				///< Flag indicating if this object is configured and ready to use.
 #ifdef RTC_H
 	poNRTCTy	poNRTC;						///< Pointer to the RTC object instance.
 #endif
@@ -64,9 +64,9 @@ extern volatile unsigned long timer0_overflow_count;
 ///
 /// \return 	TRUE if success, FALSE otherwise.
 ////////////////////////////////////////////////////////////////////////////////
-BOOL SystemTimeInit()
+bool SystemTimeInit()
 {
-	BOOL bRet = FALSE;
+	bool bRet = FALSE;
 	
 	if (!oSystemTime.bIsInitialized)
 	{
@@ -180,9 +180,9 @@ void SystemTimeDelay(unsigned long tick)
 ///
 /// \return 	TRUE if success, FALSE otherwise.
 ////////////////////////////////////////////////////////////////////////////////
-BOOL SystemTimeRTCInit()
+bool SystemTimeRTCInit()
 {
-	BOOL 	bRet 		= FALSE;
+	bool 	bRet 		= FALSE;
 	UINT32	u32TimeDiff	= 0;
 	
 	if (oSystemTime.bIsInitialized)
@@ -249,10 +249,10 @@ END:
 ///
 /// \return		TRUE if RTC is initialized, FALSE otherwise.
 ////////////////////////////////////////////////////////////////////////////////
-BOOL SystemTimeRTCIsInit()
+bool SystemTimeRTCIsInit()
 {
-	BOOL bRet 		= FALSE;
-	BOOL bIsInit 	= FALSE;
+	bool bRet 		= FALSE;
+	bool bIsInit 	= FALSE;
 
 	if (oSystemTime.bIsInitialized && oSystemTime.poNRTC)
 	{
@@ -277,9 +277,9 @@ BOOL SystemTimeRTCIsInit()
 ///
 /// \return		TRUE if RTC is available, FALSE otherwise.
 ////////////////////////////////////////////////////////////////////////////////
-BOOL SystemTimeRTCGetDate(UINT16* pu16Year, UINT8* pu8Month, UINT8* pu8Day)
+bool SystemTimeRTCGetDate(UINT16* pu16Year, UINT8* pu8Month, UINT8* pu8Day)
 {
-	BOOL 	bRet 		= FALSE;
+	bool 	bRet 		= FALSE;
 	UINT16 	u16DayYear	= 0;
 	UINT8 	u8DayWeek	= 0;
 	
@@ -312,9 +312,9 @@ BOOL SystemTimeRTCGetDate(UINT16* pu16Year, UINT8* pu8Month, UINT8* pu8Day)
 ///
 /// \return		TRUE if RTC is available, FALSE otherwise.
 ////////////////////////////////////////////////////////////////////////////////
-BOOL SystemTimeRTCGetTime(UINT8* pu8Hour, UINT8* pu8Minute, UINT8* pu8Second)
+bool SystemTimeRTCGetTime(UINT8* pu8Hour, UINT8* pu8Minute, UINT8* pu8Second)
 {
-	BOOL bRet = FALSE;
+	bool bRet = FALSE;
 
 	if (pu8Hour && pu8Minute && pu8Second)
 	{
@@ -349,9 +349,9 @@ BOOL SystemTimeRTCGetTime(UINT8* pu8Hour, UINT8* pu8Minute, UINT8* pu8Second)
 ///
 /// \return		TRUE if RTC is available, FALSE otherwise.
 ////////////////////////////////////////////////////////////////////////////////
-BOOL SystemTimeRTCGetDateTime(UINT16* pu16Year, UINT8* pu8Month, UINT8* pu8DayMonth, UINT8* pu8Hour, UINT8* pu8Minute, UINT8* pu8Second)
+bool SystemTimeRTCGetDateTime(UINT16* pu16Year, UINT8* pu8Month, UINT8* pu8DayMonth, UINT8* pu8Hour, UINT8* pu8Minute, UINT8* pu8Second)
 {
-	BOOL bRet = FALSE;
+	bool bRet = FALSE;
   
 
 	if (pu16Year && pu8Month && pu8DayMonth && pu8Hour && pu8Minute && pu8Second)
@@ -390,9 +390,9 @@ BOOL SystemTimeRTCGetDateTime(UINT16* pu16Year, UINT8* pu8Month, UINT8* pu8DayMo
 ///
 /// \return		TRUE if RTC is available, FALSE otherwise.
 ////////////////////////////////////////////////////////////////////////////////
-BOOL SystemTimeRTCSetDate(UINT16 u16Year, UINT8 u8Month, UINT8 u8Day)
+bool SystemTimeRTCSetDate(UINT16 u16Year, UINT8 u8Month, UINT8 u8Day)
 {
-	BOOL bRet = FALSE;
+	bool bRet = FALSE;
 
 	// Only use RTC if it is available in the current application.
 	if (oSystemTime.bIsInitialized && oSystemTime.poNRTC)
@@ -414,9 +414,9 @@ BOOL SystemTimeRTCSetDate(UINT16 u16Year, UINT8 u8Month, UINT8 u8Day)
 ///
 /// \return		TRUE if RTC is available, FALSE otherwise.
 ////////////////////////////////////////////////////////////////////////////////
-BOOL SystemTimeRTCSetTime(UINT8 u8Hour, UINT8 u8Minute, UINT8 u8Second)
+bool SystemTimeRTCSetTime(UINT8 u8Hour, UINT8 u8Minute, UINT8 u8Second)
 {
-	BOOL bRet = FALSE;
+	bool bRet = FALSE;
 
 	// Only use RTC if it is available in the current application.
 	if (oSystemTime.bIsInitialized && oSystemTime.poNRTC)
@@ -443,9 +443,9 @@ BOOL SystemTimeRTCSetTime(UINT8 u8Hour, UINT8 u8Minute, UINT8 u8Second)
 ///
 /// \return		TRUE if RTC is available, FALSE otherwise.
 ////////////////////////////////////////////////////////////////////////////////
-BOOL SystemTimeRTCSetDateTime(UINT16 u16Year, UINT8 u8Month, UINT8 u8DayMonth, UINT8 u8Hour, UINT8 u8Minute, UINT8 u8Second)
+bool SystemTimeRTCSetDateTime(UINT16 u16Year, UINT8 u8Month, UINT8 u8DayMonth, UINT8 u8Hour, UINT8 u8Minute, UINT8 u8Second)
 {
-	BOOL bRet = FALSE;
+	bool bRet = FALSE;
 
 	// Only use RTC if it is available in the current application.
 	if (oSystemTime.bIsInitialized && oSystemTime.poNRTC)

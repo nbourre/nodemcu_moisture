@@ -24,7 +24,6 @@
 // Data types
 ////////////////////////////////////////////////////////////////////////////////
 
-
 typedef uint8_t   UINT8;        ///< Unsigned integer, 8 bits
 typedef int8_t    INT8;         ///< Signed integer, 8 bits
 typedef uint16_t  UINT16;       ///< Unsigned integer, 16 bits
