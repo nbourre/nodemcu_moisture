@@ -3,8 +3,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "TypeDefs.h"
-//#include "CommMgr.h"
+#include "SystemTime.h"
 #include "MoistSensorMgr.h"
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Definitions
@@ -26,18 +28,59 @@ typedef struct {
 
 
   // Modules
-  poMoistSensorMgrTy  poMoistSensor;
+  poMoistSensorMgrTy  poMoistSensorMgr;
 
 } oApplicationTy, *poApplicationTy;
 
+////////////////////////////////////////////////////////////////////////////////
+// Private functions
+////////////////////////////////////////////////////////////////////////////////
+bool ApplicationInit();
+
+
+////////////////////////////////////////////////////////////////////////////////
+/// Local variables
+////////////////////////////////////////////////////////////////////////////////
+oApplicationTy oApplication = {false};
 
 
 void setup() {
-  // put your setup code here, to run once:
+
+  ApplicationInit();
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+
+}
+
+
+bool ApplicationInit() {
+  bool bRet = false;
+
+  if (!oApplication.isInit) {
+
+    // Before anything, initialize the SystemTime utility.
+    bRet = SystemTimeInit();
+    if (!bRet) goto END;
+
+    // Once the system time is initialized, wait some time for electrical setup.
+    SystemTimeDelay(100);
+
+    // Initializing the moist sensor to D8
+    oApplication.poMoistSensorMgr = MoistSensorMgr(D8);
+    if (oApplication.poMoistSensorMgr == NULL) {
+      goto END;
+    }
+
+    bRet = MoistSensorMgrConfigure(oApplication.poMoistSensorMgr);
+    if (!bRet) goto END;
+
+  }
+
+  bRet = true;
+END:
+  return bRet;
 
 }

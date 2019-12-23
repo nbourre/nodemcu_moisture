@@ -27,14 +27,30 @@
 typedef struct
 {
 	bool			bIsConfigured;					///< Flag indicating that the module is configured or not.
-	//TODO ADD PROPERTIES HERE!!
+
+    UINT16          u16ReadingInterval;
+    UINT16          u16PollingInterval;
+    UINT16          u16PollingDuration;
+	
+    // Hardware configuration
+    UINT8           u8Pin;
+
+ 	// Housekeeping results.
+	bool			bNewResultAvail;				///< Flag indicating that a new processed result is available.
+	UINT16			u16CurrentValueRaw;			    ///< The last processed raw value.
+    UINT8			u8CurrentValue;			        ///< The last processed value.
+	UINT8			u8MaximumValue;				    ///< The last processed maximum value.
+	UINT8			u8MinimumValue;				    ///< The last processed minimum value.
+    UINT8			u8AverageValue;				    ///< The last processed average value.
+
 } oMoistSensorMgrTy, *poMoistSensorMgrTy;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Prototypes
 ////////////////////////////////////////////////////////////////////////////////
-bool MoistSensorMgr();
+poMoistSensorMgrTy MoistSensorMgr(UINT8 pin);
 bool MoistSensorMgrTask();
-bool MoistSensorMgrConfigure();
+bool MoistSensorMgrConfigure(poMoistSensorMgrTy);
+bool MoistSensorMgrIsNewResultAvail(bool* pbNewResultAvail);
 
 #endif
